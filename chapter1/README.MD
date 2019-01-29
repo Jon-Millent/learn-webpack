@@ -17,13 +17,20 @@ module.exports = {
 
 ```
 
-### mode
+* mode
+    > mode分为`development`和`production`，
+    * development 
+      开发模式调试模式
+    * production
+      发布到线模式
+    <a href="https://www.webpackjs.com/concepts/mode/">详细👉</a>
 
-mode分为`development`和`production`，
+* entry
+    > 入口起点
+    
+    <a href="https://www.webpackjs.com/concepts/entry-points/">详细👉</a>
 
-* development 
-  开发模式调试模式
-
-* production
-  发布到线模式
-
+* output
+    > 输出
+    
+    <a href="https://www.webpackjs.com/concepts/output/">详细👉</a>
