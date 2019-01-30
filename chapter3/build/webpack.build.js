@@ -7,11 +7,13 @@ module.exports = {
   mode:'production',
   entry: './src/index.js',
   output: {
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     path: path.join(__dirname, '../dist')
   },
   plugins: [
-    new CleanWebpackPlugin(['./dist']),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '../'),   //根目录
+    }),
     new HtmlWebpackPlugin({
       template: './index.html'
     }),
@@ -43,14 +45,23 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+
       cacheGroups: {
         // 注意: priority属性
         // 其次: 打包业务中公共代码
         common: {
-          name: "common",
-          chunks: "all",
-          minSize: 1,
-          priority: 0
+          name: 'common',
+          chunks: 'initial',
+          priority: 2,
+          minChunks: 2,
         },
         // 首先: 打包node_modules中的文件
         vendor: {
